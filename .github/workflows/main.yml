@@ -13,7 +13,7 @@ jobs:
             - name: Setup .NET Core SDK
               uses: actions/setup-dotnet@v1
               with:
-                  dotnet-version: 8.x
+                  dotnet-version: 7.x
                   include-prerelease: true
 
             - name: Publish .NET Core Project
@@ -24,3 +24,10 @@ jobs:
 
             - name: Add .nojekyll file
               run: touch release/wwwroot/.nojekyll
+
+            - name: Commit wwwroot to GitHub Pages
+              uses: JamesIves/github-pages-deploy-action@3.7.1
+              with:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  BRANCH: gh-pages
+                  FOLDER: release/wwwroot
